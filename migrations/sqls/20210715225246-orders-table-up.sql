@@ -1,4 +1,4 @@
-CREATE TABLE products (
+CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(250) NOT NULL,
     userid VARCHAR(250) NOT NULL,
