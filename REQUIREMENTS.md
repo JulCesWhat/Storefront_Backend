@@ -6,19 +6,29 @@ These are the notes from a meeting with the frontend developer that describe wha
 ## API Endpoints
 #### Products
 - Index 
+    - A Index route: 'products/' [GET]
 - Show
+    - A SHOW route: 'products/:id' [GET]
 - Create [token required]
+    - A Create route: 'products/' [POST]
 - [OPTIONAL] Top 5 most popular products 
+    - A Top 5 route: 'products?top=:top/' [GET]
 - [OPTIONAL] Products by category (args: product category)
+    - A Products by category route: 'products?category=:category/' [GET]
 
 #### Users
 - Index [token required]
+    - A Index route: 'users/' [GET]
 - Show [token required]
+    - A SHOW route: 'users/:id' [GET]
 - Create N[token required]
+    - A Create N[token required] route: 'users/' [POST]
 
 #### Orders
 - Current Order by user (args: user id)[token required]
+    - A Current Order route: 'orders/:id' [GET]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
+    - A Completed Orders by user route: 'orders/:id' [PUT]
 
 ## Data Shapes
 #### Product
@@ -27,11 +37,15 @@ These are the notes from a meeting with the frontend developer that describe wha
 - price
 - [OPTIONAL] category
 
+Table: Product (id:string[primary key], name:varchar, price:number, category:varchar)
+
 #### User
 - id
 - firstName
 - lastName
 - password
+
+Table: User (id:string[primary key], username:varchar, firstname:varchar, lastname:varchar,password:VARCHAR)
 
 #### Orders
 - id
@@ -40,3 +54,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+Table: Orders (id:string[primary key], status:varchar, user_id:string[foreign key to users table])
+
+Table: Order_Products (id:string[primary key], quantity:number, order_id:string[foreign key to publishers table], product_id:string[foreign key to publishers table])

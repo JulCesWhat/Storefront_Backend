@@ -7,7 +7,9 @@ import userRoutes from './handlers/user'
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 app.use(bodyParser.json());
 
 app.get('/', function (_req: Request, res: Response) {

@@ -1,6 +1,12 @@
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
-    firstname VARCHAR(250) NOT NULL,
-    userid VARCHAR(250) NOT NULL,
-    orderstatus VARCHAR(20) NOT NULL
+    status VARCHAR(15),
+    user_id bigint REFERENCES users(id)
+);
+
+CREATE TABLE order_products (
+    id SERIAL PRIMARY KEY,
+    quantity integer,
+    order_id bigint REFERENCES orders(id),
+    product_id bigint REFERENCES products(id)
 );

@@ -8,7 +8,9 @@
         "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
         "migrate-dev": "db-migrate --env dev up",
         "migrate-test": "db-migrate --env test up",
-        "test": "SET ENV=test && db-migrate db:create store_test && db-migrate --env test up && jasmine-ts && db-migrate db:drop store_test"
+        "drop-test-db": "db-migrate db:drop store_test",
+        "test": "SET ENV=test && db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db",
+        "test_OSX": "db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db"
     },
     "author": "",
     "license": "ISC",
@@ -17,6 +19,7 @@
         "@types/pg": "^7.14.7",
         "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
         "db-migrate": "^0.11.12",
         "db-migrate-pg": "^1.2.2",
         "dotenv": "^10.0.0",
@@ -27,11 +30,13 @@
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",
+        "@types/cors": "^2.8.12",
         "@types/jasmine": "^3.8.1",
         "@types/jsonwebtoken": "^8.5.4",
         "jasmine": "^3.8.0",
         "jasmine-spec-reporter": "^6.0.0",
         "jasmine-ts": "^0.3.0",
+        "nodemon": "^2.0.12",
         "ts-node": "^9.1.1",
         "tsc-watch": "^4.2.9"
     }
