@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { User, UserStore } from '../models/user';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import authentication from '../utilities/authentication';
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const index = async (_req: Request, res: Response) => {
 }
 
 const show = async (req: Request, res: Response) => {
-    const user = await store.show(req.body.id);
+    const user = await store.show(req.params.id);
     res.json(user);
 }
 
@@ -57,10 +58,10 @@ const authenticate = async (req: Request, res: Response) => {
 
 
 const userRoutes = (app: express.Application) => {
-    app.get('/users', index);
-    app.get('/users/:id', show);
+    app.get('/users', authentication,  index);
+    app.get('/users/:id', authentication, show);
     app.post('/users', create);
-    app.delete('/users', destroy);
+    app.delete('/users', authentication, destroy);
     app.post('/authenticate', authenticate);
 }
 

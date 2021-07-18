@@ -6,22 +6,22 @@ describe('User Model', () => {
     it('should have an index method', () => {
         expect(store.index).toBeDefined();
     });
-    it('should have a show method', () => {
-        expect(store.show).toBeDefined();
-    });
     it('should have a create method', () => {
         expect(store.create).toBeDefined();
     });
+    it('should have a show method', () => {
+        expect(store.show).toBeDefined();
+    });
 
-    //   it('should have a update method', () => {
+    // it('should have a update method', () => {
     //     expect(store.).toBeDefined();
-    //   });
+    // });
 
     it('should have a delete method', () => {
         expect(store.delete).toBeDefined();
     });
 
-    it('create method should add a user', async () => {
+    it('create method should create a user', async () => {
         const result = await store.create({
             username: 'Capi@vara.com',
             firstname: 'Capi',
@@ -29,7 +29,7 @@ describe('User Model', () => {
             password: 'password'
         } as User);
 
-        expect(result.id).toEqual(1);
+        expect(result.id).toEqual(2);
         expect(result.username).toEqual('Capi@vara.com');
         expect(result.firstname).toEqual('Capi');
         expect(result.lastname).toEqual('Vara');
@@ -37,7 +37,7 @@ describe('User Model', () => {
     it('index method should return a list of users', async () => {
         const result = await store.index();
 
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(2);
     });
     it('show method should return the correct user', async () => {
         const result = await store.show("1");
@@ -49,9 +49,9 @@ describe('User Model', () => {
     });
 
     it('delete method should remove the user', async () => {
-        await store.delete("1");
+        await store.delete("2");
         const result = await store.index();
 
-        expect(result).toEqual([]);
+        expect(result.length).toEqual(1);
     });
 });

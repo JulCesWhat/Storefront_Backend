@@ -8,26 +8,23 @@ const store = new OrderStore();
 //     res.json(products);
 // }
 
-// const show = async (req: Request, res: Response) => {
-//     const product = await store.show(req.body.id);
-//     res.json(product);
-// }
+const show = async (req: Request, res: Response) => {
+    const product = await store.show(req.body.id);
+    res.json(product);
+}
 
-// const create = async (req: Request, res: Response) => {
-//     try {
-//         const product: Product = {
-//             name: req.body.name,
-//             price: req.body.price,
-//             category: req.body.category || '',
-//         };
+const create = async (req: Request, res: Response) => {
+    try {
+        const user_id = req.body.user_id;
+        console.log(user_id)
 
-//         const newProduct = await store.create(product);
-//         res.json(newProduct);
-//     } catch (err) {
-//         res.status(400);
-//         res.json(err);
-//     }
-// }
+        const newProduct = await store.create(user_id);
+        res.json(newProduct);
+    } catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+}
 
 // const destroy = async (req: Request, res: Response) => {
 //     const deleted = await store.delete(req.body.id)
@@ -35,9 +32,9 @@ const store = new OrderStore();
 // }
 
 const addProduct = async (_req: Request, res: Response) => {
-    const orderId: string = _req.params.id
-    const productId: string = _req.body.productId
-    const quantity: number = parseInt(_req.body.quantity)
+    const orderId: number = parseInt(_req.params.id);
+    const productId: number = parseInt(_req.body.productId);
+    const quantity: number = parseInt(_req.body.quantity);
 
     try {
         const addedProduct: OrderProduct = await store.addProduct(quantity, orderId, productId)
@@ -51,8 +48,8 @@ const addProduct = async (_req: Request, res: Response) => {
 
 const orderRoutes = (app: express.Application) => {
     // app.get('/orders', index)
-    // app.get('/orders/:id', show)
-    // app.post('/orders', create)
+    app.get('/orders/:id', show)
+    app.post('/orders', create)
     // add product
     app.post('/orders/:id/products', addProduct)
 }

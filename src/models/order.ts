@@ -3,18 +3,43 @@ import Client from '../database';
 export type Order = {
     id?: number;
     status: string;
-    user_id: number;
+    user_id: string;
 }
 
 export type OrderProduct = {
     id?: number;
-    quantity: string;
-    order_idprice: number;
-    product_id: number;
+    quantity: number;
+    order_id: string;
+    product_id: string;
 }
 
 export class OrderStore {
-    async addProduct(quantity: number, orderId: string, productId: string): Promise<OrderProduct> {
+
+    async show(id: string): Promise<Order> {
+        try {
+            const conn = await Client.connect();
+            const sql = 'SELECT * FROM orders WHERE id=($1)';
+            const result = await conn.query(sql, [id]);
+            conn.release();
+            return result.rows[0];
+        } catch (err) {
+            throw new Error(`Could not find orders ${id}. Error: ${err}`);
+        }
+    }
+
+    async create(userId: number): Promise<Order> {
+        try {
+            const conn = await Client.connect();
+            const sql = 'INSERT INTO orders (status, user_id) VALUES($1, $2) RETURNING *'
+            const result = await conn.query(sql, ['open', userId]);
+            conn.release();
+            return result.rows[0];
+        } catch (err) {
+            throw new Error(`Could not add new order ${userId}. Error: ${err}`);
+        }
+    }
+
+    async addProduct(quantity: number, orderId: number, productId: number): Promise<OrderProduct> {
         // get order to see if it is open
         try {
             const ordersql = 'SELECT * FROM orders WHERE id=($1)'

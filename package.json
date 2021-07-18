@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/server.ts",
+        "start": "db-migrate up && nodemon src/server.ts",
         "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
         "migrate-dev": "db-migrate --env dev up",
         "migrate-test": "db-migrate --env test up",

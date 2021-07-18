@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Product, ProductStore } from '../models/product';
+import authentication from './../utilities/authentication';
 
 const store = new ProductStore();
 
@@ -9,7 +10,7 @@ const index = async (_req: Request, res: Response) => {
 }
 
 const show = async (req: Request, res: Response) => {
-    const product = await store.show(req.body.id);
+    const product = await store.show(req.params.id);
     res.json(product);
 }
 
@@ -38,7 +39,7 @@ const destroy = async (req: Request, res: Response) => {
 const productRoutes = (app: express.Application) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    app.post('/products', create);
+    app.post('/products', authentication, create);
     app.delete('/products', destroy);
 }
 

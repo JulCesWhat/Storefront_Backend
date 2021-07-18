@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import productRoutes from './handlers/product';
 import userRoutes from './handlers/user'
+import orderRoutes from './handlers/order';
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
@@ -16,6 +17,7 @@ app.get('/', function (_req: Request, res: Response) {
     res.send('Hello World!')
 });
 
+orderRoutes(app);
 productRoutes(app);
 userRoutes(app);
 
