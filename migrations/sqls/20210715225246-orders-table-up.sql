@@ -4,7 +4,7 @@ CREATE TABLE orders (
     user_id bigint REFERENCES users(id)
 );
 
-CREATE TABLE order_products (
+CREATE TABLE order_items (
     id SERIAL PRIMARY KEY,
     quantity integer,
     order_id bigint REFERENCES orders(id),

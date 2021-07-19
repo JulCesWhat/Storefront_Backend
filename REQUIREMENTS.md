@@ -56,4 +56,4 @@ Table: User (id:string[primary key], username:varchar, firstname:varchar, lastna
 
 Table: Orders (id:string[primary key], status:varchar, user_id:string[foreign key to users table])
 
-Table: Order_Products (id:string[primary key], quantity:number, order_id:string[foreign key to publishers table], product_id:string[foreign key to publishers table])
+Table: Order_Items (id:string[primary key], quantity:number, order_id:string[foreign key to publishers table], product_id:string[foreign key to publishers table])
