@@ -13,6 +13,16 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
+## Set Up
+- Clone repo
+- `cd` into the folder that you cloned the repo
+- Run `npm i` to install all the dependencies
+- Run `docker-compose up` to start up the db
+- Run `npm start` to boot up the server
+- Once the app is running go to `http://localhost:3000` in the browser
+- Run `npm run test_OSX` to run the tests
+- Server will be using port 3000 and db port 5432
+
 ## Steps to Completion
 
 ### 1. Plan to Meet Requirements

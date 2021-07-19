@@ -4,13 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "db-migrate --env test up && ENV=test nodemon src/server.ts",
+        "start": "db-migrate up && ENV=dev nodemon src/server.ts",
         "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
         "migrate-dev": "db-migrate --env dev up",
         "migrate-test": "db-migrate --env test up",
         "drop-test-db": "db-migrate db:drop store_test",
         "test": "SET ENV=test && db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db",
-        "test_OSX": "npm run drop-test-db && db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db"
+        "test_OSX": "db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db"
     },
     "author": "",
     "license": "ISC",
