@@ -16,10 +16,9 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
     try {
         const user_id = req.body.user_id;
-        console.log(user_id)
 
-        const newProduct = await store.create(user_id);
-        res.json(newProduct);
+        const newOrder = await store.create(user_id);
+        res.json(newOrder);
     } catch (err) {
         res.status(400);
         res.json(err);

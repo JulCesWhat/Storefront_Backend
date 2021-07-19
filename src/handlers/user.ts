@@ -32,7 +32,7 @@ const create = async (req: Request, res: Response) => {
         };
 
         const newUser = await store.create(user);
-        const token = jwt.sign({ firstname: newUser.firstname, lastname: newUser.lastname }, TOKEN_SECRET as string)
+        const token = jwt.sign({ firstname: newUser.firstname, lastname: newUser.lastname }, TOKEN_SECRET as string);
         res.json(token);
     } catch (err) {
         res.status(400);
@@ -41,7 +41,7 @@ const create = async (req: Request, res: Response) => {
 }
 
 const destroy = async (req: Request, res: Response) => {
-    const deleted = await store.delete(req.body.id)
+    const deleted = await store.delete(req.params.id)
     res.json(deleted)
 }
 
@@ -61,7 +61,7 @@ const userRoutes = (app: express.Application) => {
     app.get('/users', authentication,  index);
     app.get('/users/:id', authentication, show);
     app.post('/users', create);
-    app.delete('/users', authentication, destroy);
+    app.delete('/users/:id', authentication, destroy);
     app.post('/authenticate', authenticate);
 }
 

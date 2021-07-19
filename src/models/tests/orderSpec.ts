@@ -39,7 +39,7 @@ describe('Order Model', () => {
         const result = await orderStore.create(1);
 
         expect(result).toEqual({
-            id: 1,
+            id: 2,
             status: 'open',
             user_id: '1'
         });

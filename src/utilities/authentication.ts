@@ -11,7 +11,6 @@ const {
 const authentication = (req: Request, res: Response, next: NextFunction): void => {
     try {
         const authorizationHeader = req.headers.authorization || '';
-        console.log(authorizationHeader);
         const token = authorizationHeader.split(' ')[1];
         jwt.verify(token, TOKEN_SECRET as string);
         next();

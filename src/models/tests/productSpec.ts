@@ -1,4 +1,4 @@
-import { Product, ProductStore } from './../product';
+import { Product, ProductStore } from '../product';
 
 const store = new ProductStore();
 
@@ -28,7 +28,7 @@ describe('Product Model', () => {
         } as Product);
 
         expect(result).toEqual({
-            id: 2,
+            id: 3,
             name: 'Car',
             price: 10,
             category: 'Toy'
@@ -37,7 +37,7 @@ describe('Product Model', () => {
     it('index method should return a list of products', async () => {
         const result = await store.index();
 
-        expect(result.length).toEqual(2);
+        expect(result.length).toEqual(3);
     });
     it('show method should return the correct product', async () => {
         const result = await store.show("2");
@@ -54,6 +54,6 @@ describe('Product Model', () => {
         await store.delete("2");
         const result = await store.index();
 
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(2);
     });
 });

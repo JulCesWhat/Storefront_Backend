@@ -1,4 +1,4 @@
-import { User, UserStore } from './../user';
+import { User, UserStore } from '../user';
 
 const store = new UserStore();
 
@@ -29,7 +29,7 @@ describe('User Model', () => {
             password: 'password'
         } as User);
 
-        expect(result.id).toEqual(2);
+        expect(result.id).toEqual(3);
         expect(result.username).toEqual('Capi@vara.com');
         expect(result.firstname).toEqual('Capi');
         expect(result.lastname).toEqual('Vara');
@@ -37,12 +37,12 @@ describe('User Model', () => {
     it('index method should return a list of users', async () => {
         const result = await store.index();
 
-        expect(result.length).toEqual(2);
+        expect(result.length).toEqual(3);
     });
     it('show method should return the correct user', async () => {
-        const result = await store.show("1");
+        const result = await store.show("3");
 
-        expect(result.id).toEqual(1);
+        expect(result.id).toEqual(3);
         expect(result.username).toEqual('Capi@vara.com');
         expect(result.firstname).toEqual('Capi');
         expect(result.lastname).toEqual('Vara');
@@ -52,6 +52,6 @@ describe('User Model', () => {
         await store.delete("2");
         const result = await store.index();
 
-        expect(result.length).toEqual(1);
+        expect(result.length).toEqual(2);
     });
 });
