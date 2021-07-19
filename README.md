@@ -14,7 +14,7 @@ Your application must make use of the following libraries:
 - jasmine from npm for testing
 
 ## Set Up
-- Clone repo
+- Clone repo [Storefront_Backend](https://github.com/JulCesWhat/Storefront_Backend)
 - `cd` into the folder that you cloned the repo
 - Run `npm i` to install all the dependencies
 - Run `docker-compose up` to start up the db
