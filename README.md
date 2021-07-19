@@ -17,6 +17,16 @@ Your application must make use of the following libraries:
 - Clone repo [Storefront_Backend](https://github.com/JulCesWhat/Storefront_Backend)
 - `cd` into the folder that you cloned the repo
 - Run `npm i` to install all the dependencies
+- Add a `.env file` that contains the folowing properties
+    - POSTGRES_HOST
+    - POSTGRES_DB
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
+    - POSTGRES_TEST_DB
+    - ENV
+    - BCRYPT_PASSWORD
+    - SALT_ROUNDS
+    - TOKEN_SECRET
 - Run `docker-compose up` to start up the db
 - Run `npm start` to boot up the server
 - Once the app is running go to `http://localhost:3000` in the browser
