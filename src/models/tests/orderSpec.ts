@@ -1,4 +1,4 @@
-import { Order, OrderProduct, OrderStore } from '../order';
+import { Order, OrderStore } from '../order';
 import { User, UserStore } from '../user';
 import { Product, ProductStore } from '../product';
 
@@ -17,9 +17,6 @@ describe('Order Model', () => {
     it('should have a show method', () => {
         expect(orderStore.show).toBeDefined();
     });
-    it('should have an add product method', () => {
-        expect(orderStore.addProduct).toBeDefined();
-    });
 
     // it('should have a update method', () => {
     //     expect(store.).toBeDefined();
@@ -29,20 +26,17 @@ describe('Order Model', () => {
     // });
 
     it('create method should create an order', async () => {
-        const cpai = await userStore.create({
+        const newUser = await userStore.create({
             username: 'Capi@vara.com',
             firstname: 'Capi',
             lastname: 'Vara',
             password: 'password'
         } as User);
 
-        const result = await orderStore.create(1);
+        const result = await orderStore.create(newUser.id || 0);
 
-        expect(result).toEqual({
-            id: 2,
-            status: 'open',
-            user_id: '1'
-        });
+        expect(result.status).toEqual('open');
+        expect(result.user_id).toEqual((newUser.id || 0).toString());
     });
     // it('index method should return a list of products', async () => {
     //     const result = await store.index();
@@ -65,23 +59,6 @@ describe('Order Model', () => {
     //         user_id: 1
     //     });
     // });
-
-    it('addProduct method should return an order product', async () => {
-        await productStore.create({
-            name: 'Car',
-            price: 10,
-            category: 'Toy'
-        } as Product);
-
-        const result = await orderStore.addProduct(1, 1, 1);
-
-        expect(result).toEqual({
-            id: 1,
-            quantity: 1,
-            order_id: '1',
-            product_id: '1'
-        });
-    });
 
     // it('delete method should remove the product', async () => {
     //     await store.delete("1");

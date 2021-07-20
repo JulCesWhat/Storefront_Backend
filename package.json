@@ -10,7 +10,7 @@
         "migrate-test": "db-migrate --env test up",
         "drop-test-db": "db-migrate db:drop store_test",
         "test": "SET ENV=test && db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db",
-        "test_OSX": "db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db"
+        "test_OSX": "npm run drop-test-db && db-migrate db:create store_test && db-migrate --env test up && ENV=test jasmine-ts && npm run drop-test-db"
     },
     "author": "",
     "license": "ISC",

@@ -49,11 +49,15 @@ Table: User (id:string[primary key], username:varchar, firstname:varchar, lastna
 
 #### Orders
 - id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- status of order
+- user_id of the user who created  the order
 
 Table: Orders (id:string[primary key], status:varchar, user_id:string[foreign key to users table])
+
+#### Order Items
+- id
+- quantity of each product in the order
+- order_id of the order this item belongs to
+- product_id of the product that is added to the order
 
 Table: Order_Items (id:string[primary key], quantity:number, order_id:string[foreign key to publishers table], product_id:string[foreign key to publishers table])

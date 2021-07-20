@@ -44,7 +44,7 @@ export class UserStore {
 
     async create(p: User): Promise<User> {
         try {
-            const salt = bcrypt.genSaltSync(parseInt(SALT_ROUNDS as string));
+            const salt = await bcrypt.genSalt(parseInt(SALT_ROUNDS as string));
             const password = bcrypt.hashSync(
                 p.password + BCRYPT_PASSWORD,
                 salt

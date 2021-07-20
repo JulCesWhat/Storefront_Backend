@@ -20,9 +20,9 @@ Your application must make use of the following libraries:
 - Add a `.env file` that contains the folowing properties
     - POSTGRES_HOST
     - POSTGRES_DB
+    - POSTGRES_TEST_DB
     - POSTGRES_USER
     - POSTGRES_PASSWORD
-    - POSTGRES_TEST_DB
     - ENV
     - BCRYPT_PASSWORD
     - SALT_ROUNDS

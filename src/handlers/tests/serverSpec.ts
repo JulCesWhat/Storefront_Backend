@@ -5,6 +5,8 @@ import { Product } from '../../models/product';
 
 describe("User Server Endpoints", () => {
     let token: string = '';
+    let userId: number = 0;
+    let productId: number = 0;
     beforeAll(() => {
         require('../../server');
     });
@@ -41,6 +43,7 @@ describe("User Server Endpoints", () => {
             }, (_, response: request.Response, body: string) => {
                 data.status = response.statusCode;
                 data.users = JSON.parse(body) as User[];
+                userId = data.users[0].id || 0;
                 done();
             });
         });
@@ -65,11 +68,11 @@ describe("User Server Endpoints", () => {
             expect(data.status).toBe(401);
         });
     });
-    describe("GET /users/1", () => {
+    describe(`GET /users/${userId}`, () => {
         const data: { status: number } = { status: 0 };
         beforeAll((done) => {
             request.get({
-                url: "http://localhost:3000/users/1",
+                url: `http://localhost:3000/users/${userId}`,
                 headers: {
                     'authorization': token
                 }
@@ -114,6 +117,8 @@ describe("User Server Endpoints", () => {
                 url: "http://localhost:3000/products"
             }, (_, response: request.Response, body: string) => {
                 data.status = response.statusCode;
+                const products = JSON.parse(body) as User[];
+                productId = products[0].id || 0;
                 done();
             });
         });
@@ -121,11 +126,11 @@ describe("User Server Endpoints", () => {
             expect(data.status).toBe(200);
         });
     });
-    describe("GET /products/1", () => {
+    describe(`GET /products/${productId}`, () => {
         const data: { status: number } = { status: 0 };
         beforeAll((done) => {
             request.get({
-                url: "http://localhost:3000/products/1"
+                url: `http://localhost:3000/products/${productId}`
             }, (_, response: request.Response, body: Product) => {
                 data.status = response.statusCode;
                 done();

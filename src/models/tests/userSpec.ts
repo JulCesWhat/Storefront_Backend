@@ -3,6 +3,13 @@ import { User, UserStore } from '../user';
 const store = new UserStore();
 
 describe('User Model', () => {
+    let newUser: User = { id: 0, username: '', firstname: '', lastname: '', password: '' };
+    let userAmount = 0;
+
+    beforeAll(async () => {
+        const result = await store.index();
+        userAmount = result.length;
+    });
     it('should have an index method', () => {
         expect(store.index).toBeDefined();
     });
@@ -28,8 +35,8 @@ describe('User Model', () => {
             lastname: 'Vara',
             password: 'password'
         } as User);
+        newUser = result as User;
 
-        expect(result.id).toEqual(3);
         expect(result.username).toEqual('Capi@vara.com');
         expect(result.firstname).toEqual('Capi');
         expect(result.lastname).toEqual('Vara');
@@ -37,21 +44,18 @@ describe('User Model', () => {
     it('index method should return a list of users', async () => {
         const result = await store.index();
 
-        expect(result.length).toEqual(3);
+        expect(result.length).toBeGreaterThan(userAmount);
     });
     it('show method should return the correct user', async () => {
-        const result = await store.show("3");
+        const result = await store.show((newUser.id || 0).toString());
 
-        expect(result.id).toEqual(3);
-        expect(result.username).toEqual('Capi@vara.com');
-        expect(result.firstname).toEqual('Capi');
-        expect(result.lastname).toEqual('Vara');
+        expect(result).toEqual(newUser);
     });
 
     it('delete method should remove the user', async () => {
-        await store.delete("2");
+        await store.delete((newUser.id || 0).toString());
         const result = await store.index();
 
-        expect(result.length).toEqual(2);
+        expect(result.length).toEqual(userAmount);
     });
 });
